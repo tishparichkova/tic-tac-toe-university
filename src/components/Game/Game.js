@@ -5,6 +5,7 @@ import { setup, placeAndProceed } from "./../../store/actions";
 
 import './Game.scss';
 import { Board } from './../Board/Board';
+import { InformationInput } from './../InformationInput/InformationInput';
 
 const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup }) => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
     if (!gameReady) {
       debugger;
       setup(
-        [...Array(9)],[{ computer: false, token: 'X' }, { computer: true, token: 'O' }]
+        [...Array(9)],[{ computer: false, token: 'X', color: 'antiquewhite'}, { computer: true, token: 'O', color: 'grey' }]
       );
     }
   }, [gameReady, setup]);
@@ -29,7 +30,10 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
   return (
     (gameReady && (
       <div>
-        <h2>Player {playerTurn}'s turn</h2>
+        <div className="players-information">
+          <InformationInput token={players[playerTurn].token}/>
+          <InformationInput token={players[playerTurn].token}/>
+        </div>
         <Board
           board={board}
           onChooseTile={onPlace}

@@ -34,22 +34,25 @@ export function setWinner(winner) {
 export function placeAndProceed(index) {
   return function(dispatch, getState) {
     dispatch(place(index));
-    debugger;
 
     const openSquares = getState().board.filter(
       square => !square
     );
 
-    debugger;
     if (openSquares.length > 0) {
       dispatch(nextPlayer());
     } else {
-      alert(
-        "Implement the winner check in redux/actions.js"
-      );
+      dispatch(checkWinner());
     }
   };
 }
+
+export function checkWinner() {
+  return function(dispatch, getState) {
+    alert('the winner is');
+
+  }
+};
 
 export function playAutomatically() {
   return function(dispatch, getState) {

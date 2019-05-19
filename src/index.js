@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
-// import styles from "./styles.css";
+import './index.scss';
 import store from './store/';
 import { GameContainer } from './components/Game/Game';
 
