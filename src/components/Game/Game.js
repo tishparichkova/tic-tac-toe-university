@@ -1,21 +1,58 @@
-import React from 'react';
+import React, {useEffect } from 'react';
+import { connect } from "react-redux";
 
-import { Board } from '../Board/Board';
+import { setup, placeAndProceed } from "./../../store/actions";
+
 import './Game.scss';
+import { Board } from './../Board/Board';
 
-const  Game = () => {
+const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup }) => {
+  useEffect(() => {
+    debugger;
+    if (!gameReady) {
+      debugger;
+      setup(
+        [...Array(9)],[{ computer: false, token: 'X' }, { computer: true, token: 'O' }]
+      );
+    }
+  }, [gameReady, setup]);
+
+  const onPlace = (index) => {
+    const isHumanTurn = !players[playerTurn].computer;
+
+    if (isHumanTurn && !board[index]) {
+      placeAndProceed(index);
+    }
+  };
+
+  
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board />
+    (gameReady && (
+      <div>
+        <h2>Player {playerTurn}'s turn</h2>
+        <Board
+          board={board}
+          onChooseTile={onPlace}
+        />
       </div>
-      <div className="game-info">
-        <div>{/* status */}</div>
-        <ol>{/* TODO */}</ol>
-      </div>
-    </div>
+    )) ||
+    "Setting up..."
   );
-};
+}
 
+const mapStateToProps = state => ({
+  gameReady: state.gameReady,
+  board: state.board,
+  playerTurn: state.playerTurn,
+  players: state.players
+});
 
-export { Game };
+const mapDispatchToProps = (dispatch) => ({
+  setup: (initialTokens, playersTokens) => dispatch(setup(initialTokens, playersTokens)),
+  placeAndProceed: (index) => dispatch(placeAndProceed(index))
+});
+
+export const GameContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Game);

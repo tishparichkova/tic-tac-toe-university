@@ -1,20 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Square = (props) => {
-  const [ value, setValue ] = useState('X');
+export const Square = ({ value, onClick }) => (
+  <div className="square" onClick={onClick}>
+    {value}
+  </div>
+);
 
-  const onClickHandler = () => {
-    alert('say hi');
-  };
-
-  return (
-    <button
-      className="square"
-      onClick={onClickHandler}
-    >
-      {props.value}
-    </button>
-  );
-}
-
-export { Square };
