@@ -1,4 +1,4 @@
-import { findRandomSquare } from '../../helpers/gameUtilities';
+import { findRandomSquare, calculateWinner } from '../../helpers/gameUtilities';
 
 import * as action from './actionTypes';
 
@@ -49,8 +49,7 @@ export function placeAndProceed(index) {
 
 export function checkWinner() {
   return function(dispatch, getState) {
-    alert('the winner is');
-
+    dispatch(setWinner(calculateWinner(getState().board)));
   }
 };
 

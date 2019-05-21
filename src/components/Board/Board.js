@@ -14,8 +14,10 @@ const Board = ({ board, onChooseTile}) => {
   };
 
   return (
-    <div className="board">
-      {board.map(renderSquare)}
+    <div className="board-holder">
+      <div className="board">
+        {board.map(renderSquare)}
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { Board } from './../Board/Board';
 import { InformationInput } from './../InformationInput/InformationInput';
 
 const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup }) => {
+  console.log(players);
   useEffect(() => {
     debugger;
     if (!gameReady) {
@@ -31,8 +32,8 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
     (gameReady && (
       <div>
         <div className="players-information">
-          <InformationInput token={players[playerTurn].token}/>
-          <InformationInput token={players[playerTurn].token}/>
+          <InformationInput token={players[0].token} active={players[0].token === players[playerTurn].token} />
+          <InformationInput token={players[1].token} active={players[1].token === players[playerTurn].token} />
         </div>
         <Board
           board={board}

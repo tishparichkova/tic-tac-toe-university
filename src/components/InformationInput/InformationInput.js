@@ -1,8 +1,10 @@
 import React from 'react';
 
-const InformationInput = ({token}) => {
+import './InformationInput.scss';
+ 
+const InformationInput = ({token, active}) => {
   return (
-    <div className="information-input"> {token} </div>
+    <div className={`information-input ${active ? 'active' : ''}`}> {token} </div>
   )
 }
 
