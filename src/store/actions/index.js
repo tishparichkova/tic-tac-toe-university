@@ -31,25 +31,38 @@ export function setWinner(winner) {
   };
 }
 
+export function setWinnerAndClearFields(winner) {
+  return function(dispatch) {
+    dispatch(setWinner(winner));
+  }
+}
+
+export function clearAllFilters() {
+  return function(dispatch) {
+    dispatch(setup([...Array(9)],[{ computer: false, token: 'X', color: 'antiquewhite'}, { computer: true, token: 'O', color: 'grey' }]))
+  }
+}
+
 export function placeAndProceed(index) {
   return function(dispatch, getState) {
-    dispatch(place(index));
-
     const openSquares = getState().board.filter(
       square => !square
     );
 
     if (openSquares.length > 0) {
       dispatch(nextPlayer());
-    } else {
-      dispatch(checkWinner());
+      dispatch(place(index));
     }
+    
+    dispatch(checkWinner());
   };
 }
 
 export function checkWinner() {
   return function(dispatch, getState) {
-    dispatch(setWinner(calculateWinner(getState().board)));
+    if (calculateWinner(getState().board) !== 'none') {
+      dispatch(setWinnerAndClearFields(calculateWinner(getState().board)));
+    }
   }
 };
 
@@ -60,8 +73,9 @@ export function playAutomatically() {
       const randomSquare = findRandomSquare(
         newBoard
       );
+
       dispatch(placeAndProceed(randomSquare));
-    }, 500);
+    }, 600);
   };
 }
 

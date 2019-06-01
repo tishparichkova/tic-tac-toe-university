@@ -11,7 +11,7 @@ export const findRandomSquare = (board) => {
   );
 
 
-  if (remainingPlaces.length === 0) {
+  if (!remainingPlaces.length) {
     return null;
   }
 
@@ -23,7 +23,6 @@ export const findRandomSquare = (board) => {
 }
 
 export const calculateWinner = squaresArray => {
-
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -46,5 +45,5 @@ export const calculateWinner = squaresArray => {
     }
   }
 
-  return 'No one';
+  return 'none';
 }

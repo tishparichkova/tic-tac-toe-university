@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+import { clearAllFilters  as clearAllFiltersAction } from './../../store/actions';
 import { Square } from './../Square/Square';
 
-const Board = ({ board, onChooseTile}) => {
+const BoardDumb = ({ board, onChooseTile, clearAllFilters }) => {
   const renderSquare = (value, index) => {
     return (
       <Square
@@ -14,12 +16,24 @@ const Board = ({ board, onChooseTile}) => {
   };
 
   return (
-    <div className="board-holder">
-      <div className="board">
-        {board.map(renderSquare)}
+    <div>
+      <div className="board-holder">
+        <div className="board">
+          {board.map(renderSquare)}
+        </div>
+        <button onClick={clearAllFilters}>New Game</button>
       </div>
     </div>
   );
 }
 
-export { Board };
+
+const mapDispatchToProps = (dispatch) => ({
+  clearAllFilters: () => dispatch(clearAllFiltersAction()),
+});
+
+export const Board = connect(
+  null,
+  mapDispatchToProps,
+)(BoardDumb);
+

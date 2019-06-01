@@ -1,28 +1,25 @@
 import React, {useEffect } from 'react';
 import { connect } from "react-redux";
 
-import { setup, placeAndProceed } from "./../../store/actions";
+import { setup, placeAndProceed, clearAllFilters as clearAllFiltersAction } from "./../../store/actions";
 
 import './Game.scss';
 import { Board } from './../Board/Board';
 import { InformationInput } from './../InformationInput/InformationInput';
 
-const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup }) => {
-  console.log(players);
+const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup, winner, clearAllFilters }) => {
   useEffect(() => {
-    debugger;
     if (!gameReady) {
-      debugger;
       setup(
         [...Array(9)],[{ computer: false, token: 'X', color: 'antiquewhite'}, { computer: true, token: 'O', color: 'grey' }]
       );
     }
-  }, [gameReady, setup]);
+  }, [gameReady, setup, winner]);
 
   const onPlace = (index) => {
     const isHumanTurn = !players[playerTurn].computer;
 
-    if (isHumanTurn && !board[index]) {
+    if (isHumanTurn && !board[index] && !winner) {
       placeAndProceed(index);
     }
   };
@@ -38,6 +35,7 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
         <Board
           board={board}
           onChooseTile={onPlace}
+          onEndGame={clearAllFilters}
         />
       </div>
     )) ||
@@ -49,12 +47,14 @@ const mapStateToProps = state => ({
   gameReady: state.gameReady,
   board: state.board,
   playerTurn: state.playerTurn,
-  players: state.players
+  players: state.players,
+  winner: state.winner,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setup: (initialTokens, playersTokens) => dispatch(setup(initialTokens, playersTokens)),
-  placeAndProceed: (index) => dispatch(placeAndProceed(index))
+  placeAndProceed: (index) => dispatch(placeAndProceed(index)),
+  clearAllFilters: () => dispatch(clearAllFiltersAction()),
 });
 
 export const GameContainer = connect(

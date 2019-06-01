@@ -37,6 +37,16 @@ function gameReducer(state = initialState, action) {
         ...state,
         winner: action.winner
       };
+    case action.CLEAR_FIELDS:
+      debugger;
+     return {
+        ...state,
+        board: [null, null, null, null, null, null, null, null, null],
+        players: [{}, {}],
+        playerTurn: 0,
+        gameReady: true,
+        winner: null,
+     }
     default:
       return state;
   }
