@@ -21,7 +21,6 @@ const BoardDumb = ({ board, onChooseTile, clearAllFilters }) => {
         <div className="board">
           {board.map(renderSquare)}
         </div>
-        <button onClick={clearAllFilters}>New Game</button>
       </div>
     </div>
   );

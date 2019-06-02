@@ -16,8 +16,6 @@ function gameReducer(state = initialState, action) {
         winner: null
       };
     case actions.PLACE:
-      debugger;
-
       return {
         ...state,
         board: state.board.map(
@@ -38,7 +36,6 @@ function gameReducer(state = initialState, action) {
         winner: action.winner
       };
     case action.CLEAR_FIELDS:
-      debugger;
      return {
         ...state,
         board: [null, null, null, null, null, null, null, null, null],

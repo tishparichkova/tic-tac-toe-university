@@ -1,4 +1,30 @@
 html,
 body {
   background-color: #def8ff;
+  font-family: 'Press Start 2P', sans-serif,
+}
+
+.button-wrapper {
+  width: 100%;
+  text-align: center;
+
+  button {
+    margin-top: 35px;
+    width: 200px;
+    height: 45px;
+    font-size: 16px;
+    color: white;
+    background-color: #07a0c8;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Press Start 2P';
+
+    &:active {
+      outline: none;
+    }
+
+    &:focus{
+      outline: none;
+    }
+  }
 }

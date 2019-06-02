@@ -6,6 +6,7 @@ import { setup, placeAndProceed, clearAllFilters as clearAllFiltersAction } from
 import './Game.scss';
 import { Board } from './../Board/Board';
 import { InformationInput } from './../InformationInput/InformationInput';
+import { MessageBox } from './../MessageBox/MessageBox';
 
 const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup, winner, clearAllFilters }) => {
   useEffect(() => {
@@ -35,8 +36,11 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
         <Board
           board={board}
           onChooseTile={onPlace}
-          onEndGame={clearAllFilters}
         />
+        <MessageBox hiddenClass={winner ? '' : 'hidden'} winner={winner} />
+        <div className="button-wrapper">
+          <button onClick={clearAllFilters}>New Game</button>
+        </div>
       </div>
     )) ||
     "Setting up..."

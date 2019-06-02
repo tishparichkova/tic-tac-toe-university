@@ -1,0 +1,11 @@
+.message-box {
+  width: 100%;
+  min-height: 100px;
+  background-color: transparent;
+  text-align: center;
+  font-size: 18px;
+}
+
+.message-box.hidden {
+  visibility: hidden;
+}
