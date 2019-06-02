@@ -1,6 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Game } from './components/Game/Game';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+import './index.scss';
+import store from './store/';
+import { GameContainer } from './components/Game/Game';
 
+const App = () => (
+  <Provider store={store}>
+    <GameContainer />
+  </Provider>
+);
+
+render(<App />, document.getElementById("root"));

@@ -1,34 +1,38 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+import { clearAllFilters  as clearAllFiltersAction } from './../../store/actions';
 import { Square } from './../Square/Square';
 
-const status = 'Next player: X';
-
-const Board = () => {
-  const renderSquare = (i) => {
-    return <Square value={i} />;
-  }
+const BoardDumb = ({ board, onChooseTile, clearAllFilters }) => {
+  const renderSquare = (value, index) => {
+    return (
+      <Square
+        key={index}
+        value={value}
+        onClick={() => onChooseTile(index)}
+      />
+    );
+  };
 
   return (
     <div>
-      <div className="status">{status}</div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
+      <div className="board-holder">
+        <div className="board">
+          {board.map(renderSquare)}
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export { Board };
+
+const mapDispatchToProps = (dispatch) => ({
+  clearAllFilters: () => dispatch(clearAllFiltersAction()),
+});
+
+export const Board = connect(
+  null,
+  mapDispatchToProps,
+)(BoardDumb);
+
