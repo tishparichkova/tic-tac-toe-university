@@ -7,6 +7,7 @@ import './Game.scss';
 import { Board } from './../Board/Board';
 import { InformationInput } from './../InformationInput/InformationInput';
 import { MessageBox } from './../MessageBox/MessageBox';
+import { MessageOverride } from '../MessageOverride/MessageOverride';
 
 const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, setup, winner, clearAllFilters }) => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
     }
   };
 
+  const MessageOverriden = MessageOverride(MessageBox);
   
   return (
     (gameReady && (
@@ -37,7 +39,7 @@ const Game = ({ index, players, playerTurn, board, placeAndProceed, gameReady, s
           board={board}
           onChooseTile={onPlace}
         />
-        <MessageBox hiddenClass={winner ? '' : 'hidden'} winner={winner} />
+        <MessageOverriden hiddenClass={winner ? '' : 'hidden'} winner={winner}/>
         <div className="button-wrapper">
           <button onClick={clearAllFilters}>New Game</button>
         </div>

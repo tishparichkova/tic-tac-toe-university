@@ -1,4 +1,4 @@
-import { findRandomSquare, calculateWinner } from '../../helpers/gameUtilities';
+import { ticTacToeHelper } from '../../helpers/gameUtilities';
 
 import * as action from './actionTypes';
 
@@ -60,8 +60,8 @@ export function placeAndProceed(index) {
 
 export function checkWinner() {
   return function(dispatch, getState) {
-    if (calculateWinner(getState().board) !== 'none') {
-      dispatch(setWinnerAndClearFields(calculateWinner(getState().board)));
+    if (ticTacToeHelper.calculateWinner(getState().board) !== 'none') {
+      dispatch(setWinnerAndClearFields(ticTacToeHelper.calculateWinner(getState().board)));
     }
   }
 };
@@ -70,7 +70,7 @@ export function playAutomatically() {
   return function(dispatch, getState) {
     setTimeout(function() {
       const newBoard = getState().board;
-      const randomSquare = findRandomSquare(
+      const randomSquare = ticTacToeHelper.findRandomSquare(
         newBoard
       );
 

@@ -38,8 +38,8 @@ function gameReducer(state = initialState, action) {
     case action.CLEAR_FIELDS:
      return {
         ...state,
-        board: [null, null, null, null, null, null, null, null, null],
-        players: [{}, {}],
+        board: new Array(9),
+        players: new Array(2),
         playerTurn: 0,
         gameReady: true,
         winner: null,
