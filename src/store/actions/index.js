@@ -60,8 +60,8 @@ export function placeAndProceed(index) {
 
 export function checkWinner() {
   return function(dispatch, getState) {
-    if (ticTacToeHelper.calculateWinner(getState().board) !== 'none') {
-      dispatch(setWinnerAndClearFields(ticTacToeHelper.calculateWinner(getState().board)));
+    if (ticTacToeHelper.getInstance().calculateWinner(getState().board) !== 'none') {
+      dispatch(setWinnerAndClearFields(ticTacToeHelper.getInstance().calculateWinner(getState().board)));
     }
   }
 };
@@ -70,7 +70,7 @@ export function playAutomatically() {
   return function(dispatch, getState) {
     setTimeout(function() {
       const newBoard = getState().board;
-      const randomSquare = ticTacToeHelper.findRandomSquare(
+      const randomSquare = ticTacToeHelper.getInstance().findRandomSquare(
         newBoard
       );
 
