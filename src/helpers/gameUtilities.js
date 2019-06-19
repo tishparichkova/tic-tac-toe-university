@@ -21,6 +21,7 @@ export const ticTacToeHelper = {
     return remainingPlaces[randomIndex];
   },
   
+
   calculateWinner: (squaresArray) => {
     const lines = [
       [0, 1, 2],
